@@ -1,0 +1,39 @@
+.container {
+  padding: 10px;
+  /*box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2),
+    0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);*/
+  border: 2px solid #3f51b5;
+  border-radius: 2px;
+}
+.labelFilter {
+  font-weight: bold;
+}
+.filterInput {
+  margin-bottom: 10px;
+  margin-top: 10px;
+  height: 40px;
+  width: 100%;
+}
+
+.enter {
+  transform: scale(0.1);
+}
+.enterActive {
+  transform: scale(1);
+  transition: 250ms linear;
+}
+.exit {
+  transform: scale(1);
+}
+.exitActive {
+  transform: scale(0.1);
+  transition: 250ms linear;
+}
+
+/*.appear {
+  transform: scale(0.1);
+}
+.appearActive {
+  transform: scale(1);
+  transition: 250ms linear;
+}*/
