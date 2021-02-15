@@ -12,14 +12,10 @@ import Logo from './components/Logo/Logo';
 
 class App extends React.Component {
   state = {
-    contacts: [
-                { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-                {id: 'id-2', name: 'Hermione Kline', number: '443-89-12'},
-                {id: 'id-3', name: 'Eden Clements', number: '645-17-79'},
-                { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' }
-    ],
+    contacts:[],
     filter: '',
     error: false,
+    message: '',
   };
  
   addContact = (name, number) => {
@@ -30,11 +26,19 @@ class App extends React.Component {
     };
     
     if (contact.name === '') { 
-      alert('Please enter contact name');
+
+     this.setState({ error: true, message: 'Please enter contact name' }) || setTimeout(() => {
+        this.setState({ error: false });
+      }, 2000)
+
       return;
     }
     if (contact.number === '') { 
-      alert('Please enter contact number');
+      
+      this.setState({ error: true, message: 'Please enter contact number' }) || setTimeout(() => {
+        this.setState({ error: false });
+      }, 2000)
+
       return;
     }
    
@@ -43,9 +47,9 @@ class App extends React.Component {
     );
     
     hasContact
-     ? this.setState({ error: true }) || setTimeout(() => {
+     ? this.setState({ error: true, message: 'This name is already in contacts!' }) || setTimeout(() => {
         this.setState({ error: false });
-      }, 2500)
+      }, 2000)
       :this.setState((prevState) => ({
         contacts: [contact, ...prevState.contacts],
       }));
@@ -82,7 +86,7 @@ class App extends React.Component {
   componentDidUpdate(prevProps, prevState) { 
 
     if (this.state.contacts !== prevState.contacts) { 
-
+        
       localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
     }
   }
@@ -90,6 +94,7 @@ class App extends React.Component {
  
   render() {
     const filterContacts = this.getFilterContacts();
+    const {contacts, filter, error, message } = this.state;
        
     return (
       
@@ -98,25 +103,29 @@ class App extends React.Component {
         <div className={s.container}>
           <ContactForm onSubmit={ this.addContact}/>
 
-          <CSSTransition
-            in={this.state.contacts.length >= 2}
+         <CSSTransition
+            in={contacts.length >= 2}
             timeout={250}
             classNames={stylesFilter}
-            unmountOnExit>
-            <Filter value={this.state.filter} onChangeFilter={this.changeFilter}/>
-          </CSSTransition>
+          unmountOnExit>
+            
+            <Filter
+              value={filter}
+              onChangeFilter={this.changeFilter} />
+            
+            </CSSTransition>
           
-          <ContactList
+          {contacts.length > 0 && <ContactList
             contacts={filterContacts}
             onDelete={this.deleteContact}
-          />
+          />}
         </div>
         <CSSTransition
-          in={this.state.error}
+          in={error}
           timeout={250}
           classNames={styleAlert}
           unmountOnExit>
-          <AlertMessage/>
+          <AlertMessage message={ message}/>
         </CSSTransition>
       </div>
      

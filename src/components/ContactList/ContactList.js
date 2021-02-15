@@ -3,8 +3,9 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import Button from '../Button/Button';
 import s from '../ContactList/ContactList.module.css';
 
-const ContactList = ({ contacts, onDelete }) => {
+const ContactList = ({ contacts, onDelete}) => {
     return (
+        
         <TransitionGroup component="ul">
             {contacts.map(({ id, name, number }) => (
                 <CSSTransition key={id} timeout={250} classNames={s}>
@@ -15,7 +16,8 @@ const ContactList = ({ contacts, onDelete }) => {
                     </li>
                 </CSSTransition>
             ))}
-        </TransitionGroup>
+            </TransitionGroup>
+       
     );
 };
 

@@ -8,7 +8,6 @@ const Logo = () => (
         appear={true}
         timeout={ 500}
         classNames={srtyles}
-          
         >
     <header>
         <h1 className={srtyles.logo}>Phonebook</h1>
