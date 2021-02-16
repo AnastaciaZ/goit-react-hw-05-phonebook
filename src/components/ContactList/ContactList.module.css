@@ -22,12 +22,12 @@ ul {
   transform: translate(-15%);
 }
 .enterActive {
-  opacity: 0.1;
+  opacity: 1;
   transform: translate(0);
   transition: transform 250ms linear;
 }
 .exit {
-  opacity: 0.1;
+  opacity: 1;
   transform: translate(0);
 }
 .exitActive {
